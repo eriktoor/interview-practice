@@ -31,7 +31,7 @@ class letterCombos: #combination sum
 
 
 """https://leetcode.com/problems/task-scheduler/discuss/130786/Python-solution-with-detailed-explanation"""
-class Solution2:
+class TaskScheduler:
     """
     greedy algo
     
@@ -104,38 +104,6 @@ class minMeetingRooms:
         # The size of the heap tells us the minimum rooms required for all the meetings.
         return len(free_rooms)
         
-
-class Solution4:
-    def maxAreaOfIsland(self, grid: List[List[int]]) -> int:
-        
-        
-        def sinkIsland(grid, i,j): 
-            
-            if i < 0 or j < 0 or i >= len(grid) or j >= len(grid[0]) or grid[i][j] == 0: 
-                return 0 
-            
-            size = 1
-            grid[i][j] = 0 
-            
-            for new_i, new_j in [(1,0), (-1,0), (0,1), (0,-1)]:
-                size += sinkIsland(grid, i + new_i, j + new_j)
-            
-            return size
-                
-            
-            
-            
-        
-        maxSize = 0 
-        for i in range(len(grid)):
-            for j in range(len(grid[0])): 
-                if grid[i][j] == 1:
-                    curr = sinkIsland(grid,i,j)
-                    maxSize = max(curr, maxSize)
-                    
-        return maxSize 
-
-
 # Definition for singly-linked list.
 # class ListNode:
 #     def __init__(self, x):
@@ -199,39 +167,3 @@ class MergeKLists:
 #         self.val = x
 #         self.left = None
 #         self.right = None
-
-class kSmallestInBinTree:
-    def kthSmallest(self, root: TreeNode, k: int) -> int:
-        #only want to remember result and which element we are at 
-        nums = [0,0] #where we are, value
-        
-        def inOrder(root, nums, k): 
-            if not root: return 
-            
-            inOrder(root.left, nums, k)
-            nums[0] += 1
-            if nums[0] == k:
-                nums[1] = root.val
-                return
-            inOrder(root.right, nums, k)
-            
-        inOrder(root, nums, k)     
-        return nums[1]
-        
-    
-    def kthSmallestNspace(self, root: TreeNode, k: int) -> int:
-        """N SPACE"""
-        
-        
-        def inOrder(root): 
-            
-            if root: 
-                inOrder(root.left)
-                order.append(root.val)
-                inOrder(root.right)
-        
-        order = []
-        
-        inOrder(root)
-        return order[k-1]
-            

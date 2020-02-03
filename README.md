@@ -13,6 +13,8 @@
 
 # [Binary Search](binSearch/)
 
+1. [Binary Search in a Matrix](binSearch/binSearchMatrix.py)
+2. [Maximum and Minimum Index in a Sorted Array](binSearch/maxMinInArr.py)
 
 # [Graph Search](graph_search/)
 
