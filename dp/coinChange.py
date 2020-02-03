@@ -27,7 +27,10 @@ class Solution:
 
 
 
-def count(S, m, n ): #top down 
+"""
+This code tells us the number of ways to make change
+"""
+def countOfWaysToMakeChange(arr_coins, num_coins, n): #top down m 
 
     # If n is 0 then there is 1 
     # solution (do not include any coin) 
@@ -42,16 +45,16 @@ def count(S, m, n ): #top down
     # If there are no coins and n 
     # is greater than 0, then no 
     # solution exist 
-    if (m <=0 and n >= 1): 
+    if (num_coins <=0 and n >= 1): 
         return 0
 
     # count is sum of solutions (i)  
     # including S[m-1] (ii) excluding S[m-1] 
-    return count( S, m - 1, n ) + count( S, m, n-S[m-1] ); 
+    return countOfWaysToMakeChange( arr_coins, num_coins - 1, n ) + countOfWaysToMakeChange( arr_coins, num_coins, n-arr_coins[num_coins-1] ); 
 
 
 
 
 arr = [1, 2, 3] 
-m = len(arr) 
-print(count(arr, m, 4)) 
+m = len(arr) #m is the number of coins 
+print(countOfWaysToMakeChange(arr, m, 4)) #n is the value we are trying to create
