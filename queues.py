@@ -49,3 +49,20 @@ Queue's could also be simulated with
 q = []
 q.pop(0), however this would not be constant time pops like using a queue library would
 """
+
+
+"""
+Priority Queues
+"""
+
+import heapq 
+
+heap = []
+heapq.heappush(heap, 5)
+heapq.heappush(heap, 2)
+heapq.heappush(heap, 1)
+heapq.heappush(heap, 11)
+
+heapq.heappop(heap)
+
+print(heapq.nsmallest(3, heap))

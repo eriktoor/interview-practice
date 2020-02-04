@@ -118,3 +118,37 @@ def minChange(coins, value):
 
 arr = [1, 2, 3] 
 print(minChange(arr, 5)) #n is the value we are trying to create
+
+
+
+
+
+
+def minCoinTopDown(tota, coins, map):
+    #if total is 0 there is nothing to do so return 0
+    if total == 0: return 0
+    #if map contains result we calculated it before
+    if total in map: return map[total]
+
+    min = float("inf")
+    for coin in coins: 
+        if count > total: 
+            continue
+        # recurse with total - coins[i] as new total
+        int val = minimumCoinTopDown(total - coins[i], coins, map);
+
+        #if val we get from picking coins[i] as first coin for current total is less
+        #than value found so far make it minimum.
+        if val < min:
+            min = val 
+
+    # if min is MAX_VAL dont change it. Just result it as is. Otherwise add 1 to it.
+    min = float("inf") if min ==  float("inf") else min + 1 
+
+    # memoize the minimum for current total.
+    map[total] = min;
+    return min;
+
+
+coins = [1,2,3,10,15]
+value = 17
