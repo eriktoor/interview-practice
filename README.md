@@ -24,7 +24,7 @@
 3. [Word Search](graph_search/wordSearch.py)
 
 ## BFS
-1. [Word Ladder](graph_search/numIslands.py)
+1. [Word Ladder](graph_search/wordLadder.py)
 2. [Shortest Path in a Binary Matrix](graph_search/shortPathBinMatrix.py)
 
 ## Djikstras 
