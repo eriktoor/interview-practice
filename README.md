@@ -26,6 +26,7 @@
 ## BFS
 1. [Word Ladder](graph_search/wordLadder.py)
 2. [Shortest Path in a Binary Matrix](graph_search/shortPathBinMatrix.py)
+3. [Walls and Gates](graph_search/wallsAndGates.py)
 
 ## Djikstras 
 1. [Network Delay Time -- Not Complete](graph_search/networkDelayTime.py)
