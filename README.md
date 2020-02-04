@@ -10,6 +10,8 @@
 4. [Longest Increasing Subsequence](dp/LIS.py)
 5. [Longest Common Substring](dp/LCS.py)
 6. [Number of Decodings || Decode Ways](dp/numDecodings.py)
+7. [Climb Stairs](dp/climbStairs.py)
+8. [Climb Stairs](dp/wordBreak.py)
 
 # [Binary Search](binSearch/)
 

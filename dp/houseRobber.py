@@ -35,3 +35,28 @@ class SolutionRobber:
             
         return memo[-1]
   
+
+
+class Solution_House_Rob_2:
+    def rob(self, a: List[int]) -> int:
+        n = len(a)
+        if n==0:
+            return 0
+        if n==1:
+            return a[0]
+        if n==2:
+            return max(a[0],a[1])
+        if(n==3):
+            return max({a[0],a[1],a[2]})
+        
+        dp1,dp2=[0]*n,[0]*n
+        
+        dp1[0],dp1[1] = a[0],max(a[0],a[1])
+        for i in range(2,n-1):
+            dp1[i] = max(dp1[i-2]+a[i], dp1[i-1])
+        
+        dp2[1],dp2[2] = a[1],max(a[1],a[2])
+        for i in range(3,n):
+            dp2[i] = max(dp2[i-2]+a[i], dp2[i-1])
+        
+        return max(max(dp1), max(dp2))
