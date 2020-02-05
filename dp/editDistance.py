@@ -140,6 +140,59 @@ class Solution:
 
 
 
+class Solutions: 
+    def minDistanceTopDown(self, word1: str, word2: str) -> int:
+      self.memo = {}
+      return self.dp(word1, word2)
+      
+      
+    def dp(self, word1, word2):
+        
+        if (word1, word2) in self.memo:
+          return self.memo[(word1, word2)]
+        
+        m, n = len(word1), len(word2)
+    
+        # If first string is empty, the only option is to 
+        # insert all characters of second string into first 
+        if m == 0: 
+             return n 
+    
+        # If second string is empty, the only option is to 
+        # remove all characters of first string 
+        if n == 0: 
+            return m 
+    
+        # If last characters of two strings are same, nothing 
+        # much to do. Ignore last characters and get count for 
+        # remaining strings. 
+        if word1[m-1]== word2[n-1]: 
+            return self.dp(word1[:-1], word2[:-1]) 
+    
+        # If last characters are not same, consider all three 
+        # operations on last character of first string, recursively 
+        # compute minimum cost for all three operations and take 
+        # minimum of three values. 
+        
+        
+        # user 
+        # user_has_id (id int(10), name varchar(255), )
+        # 
+        
+        #insert = self.minDistance(word1, word2[:-1])
+        
+        res =  1 + min(self.dp(word1, word2[:-1]),    # Insert 
+                       self.dp(word1[:-1], word2),    # Remove 
+                       self.dp(word1[:-1], word2[:-1])    # Replace 
+                       ) 
+        
+        self.memo[(word1, word2)] = res
+        
+        return res 
+        
+x = Solutions()
+x.minDistanceTopDown("geek", "gessek")
+
 
                     
                     
