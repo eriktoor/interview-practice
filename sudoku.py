@@ -25,3 +25,43 @@ def sudoku2(grid):
                 return False
             
     return True
+
+
+class Solution:
+    def isValidSudoku(self, board: List[List[str]]) -> bool:
+        valid = True
+        col_number = {}
+        square_number = {}
+
+        for r, row in enumerate(board):
+            row_number = []
+            for i, number in enumerate(row):
+                if number != '.':
+                    row_number.append(number)
+
+                    if i in col_number:
+                        col_number[i].append(number)
+                    else:
+                        col_number[i] = [number]
+
+                    index = (r // 3) * 3 + i // 3
+                    if index in square_number:
+                        square_number[index].append(number)
+                    else:
+                        square_number[index] = [number]
+
+
+            if len(row_number) != len(set(row_number)):
+                return False
+
+        for col in col_number.values():
+            if len(col) != len(set(col)):
+                return False
+
+        for square in square_number.values():
+            if len(square) != len(set(square)):
+                return False
+
+        return valid
+
+    

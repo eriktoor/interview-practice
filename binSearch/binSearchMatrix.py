@@ -55,6 +55,7 @@ Given target = 20, return false.
 
 class SolutionMatrix:
     """
+    https://leetcode.com/problems/search-a-2d-matrix/
 
 Input:
 matrix = [
@@ -89,3 +90,4 @@ Output: true
                 else: 
                     left = pivot + 1 
         return False 
+
