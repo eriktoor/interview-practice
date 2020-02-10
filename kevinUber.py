@@ -1,4 +1,5 @@
 class letterCombos: #combination sum
+    # https://leetcode.com/problems/letter-combinations-of-a-phone-number/
     def letterCombinations(self, digits: str) -> List[str]:
         
         phone = {'2': ['a', 'b', 'c'],
@@ -167,3 +168,168 @@ class MergeKLists:
 #         self.val = x
 #         self.left = None
 #         self.right = None
+
+
+class TextJustification:
+    """
+    
+    https://leetcode.com/problems/text-justification/submissions/
+    """
+    def fullJustify(self, words: List[str], maxWidth: int) -> List[str]:
+        length_list = list(map(len,words))        
+        idx = 0
+        ret = []
+        while(idx < len(words)):
+            s = idx
+            while(idx < len(words) and (sum(length_list[s:idx+1])+idx-s) <= maxWidth):
+                idx += 1
+            
+            tmp = words[s]
+            if idx-s ==1:               # if there is only one word
+                tmp += ' '* (maxWidth-len(tmp))
+            elif idx == len(words):     # if this is the last element
+                tmp = ' '.join(words[s:idx])
+                tmp += ' '* (maxWidth-len(tmp))
+            else:         # normal case
+                minLength = (idx-s-1) + sum(length_list[s:idx])     # minimum length is number of space + total length of strings
+                numExSpace = maxWidth - minLength
+                unitSpace = numExSpace//(idx-s-1)
+                extraSpace = numExSpace % (idx-s-1)
+                tmp = words[s]
+                for i in range(s+1, idx):
+                    # add space
+                    extra = 1 if i-s <= extraSpace else 0
+                    space = ' '*(1+unitSpace+extra)
+                    tmp += space
+                    # add next word
+                    tmp += words[i]
+            
+            
+            ret.append(tmp)
+        return ret
+
+
+
+'''
+The logs are already sorted by timestamp.
+Use a stack to store tasks. Only the task on stack top got executed.
+When a new task comes in, calculate the exclusive time for the previous stack top task.
+When a task ends, remove it from stack top.
+Because of single thread, task on stack top is guaranteed to ends before other tasks.
+Record the time of previous event to calcualte the time period.
+Time: O(n)
+Space: O(n)
+https://leetcode.com/problems/exclusive-time-of-functions/submissions/
+'''
+class ExclusiveTime:
+    def exclusiveTime(self, n: int, logs: List[str]) -> List[int]:
+        if not n or not logs:
+            return 0
+        task_stack = []
+        res = [0]*n
+        pre_event = 0
+        for log in logs:
+            data = log.split(':')
+            if data[1] == 'start':
+                if not task_stack:
+                    task_stack.append(int(data[0]))
+                    pre_event = int(data[2])
+                else:
+                    pre_task = task_stack[-1]
+                    res[pre_task] += int(data[2]) - pre_event
+                    task_stack.append(int(data[0]))
+                    pre_event = int(data[2])
+            else:
+                pre_task = task_stack.pop()
+                res[pre_task] += int(data[2]) - pre_event + 1
+                pre_event = int(data[2]) + 1
+        return res
+
+
+class Solution:
+    """
+    https://leetcode.com/problems/critical-connections-in-a-network/submissions/
+    
+    """
+    def criticalConnections(self, n: int, connections: List[List[int]]) -> List[List[int]]:
+
+        graph = [[] for _ in range(n)] ## vertex i ==> [its neighbors]
+		
+        currentRank = 0 ## please note this rank is NOT the num (name) of the vertex itself, it is the order of your DFS level
+		
+        lowestRank = [i for i in range(n)] ## here lowestRank[i] represents the lowest order of vertex that can reach this vertex i
+		
+        visited = [False for _ in range(n)] ## common DFS/BFS method to mark whether this node is seen before
+        
+        ## build graph:
+        for connection in connections:
+            ## this step is straightforward, build graph as you would normally do
+            graph[connection[0]].append(connection[1])
+            graph[connection[1]].append(connection[0])
+        
+        res = []
+        prevVertex = -1 ## This -1 a dummy. Does not really matter in the beginning. 
+		## It will be used in the following DFS because we need to know where the current DFS level comes from. 
+		## You do not need to setup this parameter, I setup here ONLY because it is more clear to see what are passed on in the DFS method.
+		
+        currentVertex = 0 ## we start the DFS from vertex num 0 (its rank is also 0 of course)
+        self._dfs(res, graph, lowestRank, visited, currentRank, prevVertex, currentVertex)
+        return res
+    
+    def _dfs(self, res, graph, lowestRank, visited, currentRank, prevVertex, currentVertex):
+
+        visited[currentVertex] = True # it is possible 
+        lowestRank[currentVertex] = currentRank
+
+        for nextVertex in graph[currentVertex]:
+            if nextVertex == prevVertex:
+                continue ## do not include the the incoming path to this vertex since this is the possible ONLY bridge (critical connection) that every vertex needs.
+
+            if not visited[nextVertex]:
+                self._dfs(res, graph, lowestRank, visited, currentRank + 1, currentVertex, nextVertex)
+				# We avoid visiting visited nodes here instead of doing it at the beginning of DFS - 
+				# the reason is, even that nextVertex may be visited before, we still need to update my lowestRank using the visited vertex's information.
+
+            lowestRank[currentVertex] = min(lowestRank[currentVertex], lowestRank[nextVertex]) 
+			# take the min of the current vertex's and next vertex's ranking
+            if lowestRank[nextVertex] >= currentRank + 1: ####### if all the neighbors lowest rank is higher than mine + 1, then it means I am one connecting critical connection ###
+                res.append([currentVertex, nextVertex])
+
+
+
+"""
+https://leetcode.com/problems/construct-quad-tree/submissions/
+# Definition for a QuadTree node.
+class Node:
+    def __init__(self, val, isLeaf, topLeft, topRight, bottomLeft, bottomRight):
+        self.val = val
+        self.isLeaf = isLeaf
+        self.topLeft = topLeft
+        self.topRight = topRight
+        self.bottomLeft = bottomLeft
+        self.bottomRight = bottomRight
+"""
+class ConstructQuadTree:
+    def construct(self, grid: List[List[int]]) -> 'Node':
+        """
+        @desc 
+        
+        """
+    def construct(self, grid):
+        return grid and self.dfs(0, 0, len(grid), grid) if grid else None
+    def dfs(self, i, j, l, grid):
+        if l == 1:
+            node = Node(grid[i][j] == 1, True, None, None, None, None)
+        else:
+            tLeft = self.dfs(i, j, l // 2, grid)
+            tRight = self.dfs(i, j + l // 2, l // 2, grid)
+            bLeft = self.dfs(i + l // 2, j, l// 2, grid)
+            bRight = self.dfs(i + l // 2, j + l // 2, l // 2, grid)
+            value = tLeft.val or tRight.val or bLeft.val or bRight.val
+            if tLeft.isLeaf and tRight.isLeaf and bLeft.isLeaf and bRight.isLeaf and tLeft.val == tRight.val == bLeft.val == bRight.val:
+                node = Node(value, True, None, None, None, None)
+            else:
+                node = Node(value, False, tLeft, tRight, bLeft, bRight)
+        return node
+    
+    
