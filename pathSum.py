@@ -88,3 +88,46 @@ class SolutionPathSum3:
             
         self.test(node.left, target-node.val)
         self.test(node.right, target-node.val)
+
+
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+# https://leetcode.com/problems/binary-tree-maximum-path-sum/
+
+class maxPathSum:
+    def maxPathSum(self, root: TreeNode) -> int:
+        maxPath = []
+        def inorder(root):
+            if root: 
+                maxPath.append(root.val)
+                inorder(root.left)
+                inorder(root.right)
+        
+        inorder(root)
+        
+        total_sum = maxPath[0]
+        current_sum = maxPath[0]
+        print(maxPath)
+        for i in range(1, len(maxPath)): 
+            current_sum = max(current_sum + maxPath[i], maxPath[i])
+            total_sum = max(current_sum, total_sum)
+        
+        return total_sum
+    
+    def maxPathSum(self, root: TreeNode) -> int:
+        max_path_sum = {}
+        max_path_sum["ans"] = root.val
+        def helper(node): 
+            if node == None: return 0 
+            left = max(0, helper(node.left))
+            right = max(0, helper(node.right))
+            max_path_sum["ans"] = max(max_path_sum["ans"], left + right + node.val)
+            return max(left, right) + node.val
+            
+        helper(root)
+        return max_path_sum["ans"]
