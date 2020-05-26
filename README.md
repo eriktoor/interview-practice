@@ -4,13 +4,13 @@
 
 # [Dynamic Programming](dp/)
  
-1. [Coin Change](dp/coinChange.py)
-2. [Edit Distance](dp/editDistance.py)
-3. [House Robber](dp/houseRobber.py)
-4. [Longest Increasing Subsequence](dp/LIS.py)
-5. [Longest Common Substring](dp/LCS.py)
-6. [Number of Decodings || Decode Ways](dp/numDecodings.py)
-7. [Climb Stairs](dp/climbStairs.py)
+1. [Coin Change](dp/coinChange.py) (Leetcode 322) 
+2. [Edit Distance](dp/editDistance.py) 
+3. [House Robber](dp/houseRobber.py) 
+4. [Longest Increasing Subsequence](dp/LIS.py) (Leetcode 300)
+5. [Longest Common Substring](dp/LCS.py) (Leetcode 1143) 
+6. [Number of Decodings || Decode Ways](dp/numDecodings.py) (Leetcode 91)
+7. [Climb Stairs](dp/climbStairs.py) (Leetcode 70) 
 8. [Word Break](dp/wordBreak.py)
 
 # [Binary Search](binSearch/)
@@ -21,9 +21,9 @@
 # [Graph Search](graph_search/)
 
 ## DFS 
-1. [Num Islands](graph_search/numIslands.py)
-2. [Max Island](graph_search/maxIsland.py)
-3. [Word Search](graph_search/wordSearch.py)
+1. [Num Islands](graph_search/numIslands.py) (Leetcode 200)
+2. [Max Island](graph_search/maxIsland.py) (Leetcode 695)
+3. [Word Search](graph_search/wordSearch.py) (Leetcode 79)
 
 ## BFS
 1. [Word Ladder](graph_search/wordLadder.py)
