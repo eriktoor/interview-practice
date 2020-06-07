@@ -40,7 +40,7 @@ class Solution:
                    /         \ 
          h(hval, 3)         h(hval, 2) + hval[4]
         /       \                 /             \
-h(hval, 2)  h(hval,1) +hval[3]  hval(hval, 1)   h(hval, 0) + hval[2]
+h(hval, 2)  h(hval,1) +hval[3]  h(hval, 1)   h(hval, 0) + hval[2]
 
 
 
