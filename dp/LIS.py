@@ -70,9 +70,6 @@ class Solution:
                 taken = 1 + helper(nums, nums[curpos], curpos + 1)
             nottaken = helper(nums, prev, curpos + 1)
             return max(taken, nottaken)
-
-        
-        
         
         return helper(nums, -1, 0)
     
