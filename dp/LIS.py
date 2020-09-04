@@ -1,7 +1,4 @@
 class Solution:
-
-    
-    
     def lengthOfLISBS(self, nums: List[int]) -> int:
         def binarySearch(sub, val):
             lo, hi = 0, len(sub)-1
